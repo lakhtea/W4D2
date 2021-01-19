@@ -28,7 +28,7 @@ class Board
         if @grid[row][col].nil?
             raise "There is no piece, fool!"
         end
-        unless @grid[row1][col1].nil?
+        unless @grid[row1][col1].nil? 
             raise "Where you think you're going, pal? There is a piece here!"
         end
         @grid[row1][col1], grid[row][col] = grid[row][col], @grid[row1][col1]
