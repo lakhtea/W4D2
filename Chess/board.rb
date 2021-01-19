@@ -1,7 +1,8 @@
-require_relative "piece.rb"
+require_relative 'req_file.rb'
+require_relative 'piece.rb'
 
 class Board
-    attr_reader :grid
+    attr_accessor :grid
     def initialize
         @grid = Array.new(8) {Array.new(8)}
         start_pos
@@ -37,6 +38,6 @@ class Board
 
 end
 
-b = Board.new
-b.move_piece([1,4], [3,3])
-p b.grid
+# b = Board.new
+# b.move_piece([1,4], [3,3])
+# p b.grid

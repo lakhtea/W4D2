@@ -1,0 +1,6 @@
+require_relative 'board.rb'
+require_relative 'piece.rb'
+require_relative 'slideable.rb'
+require_relative 'stepable.rb'
+require_relative 'queen.rb'
+require_relative 'rook.rb'
