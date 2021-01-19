@@ -13,32 +13,27 @@ module Slideable
     end
 
     def moves
-        moves = []
-        directions = move_dirs
-        case directions # == both
+        move_arr = []
+        case move_dirs
         when "both"
-            diag = DIAGONAL.dup
-            linear = LINEAR.dup
-            diag.each do |move|
-                x = move[0]
-                y = move[1]
-                moves << grow_unblocked_moves_in_dir(x, y)
+            DIAGONAL.each do |move|
+                move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
-            linear.each do |move|
-                moves << grow_unblocked_moves_in_dir(move[0], move[1])
+            LINEAR.each do |move|
+                move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
         when "linear"
             LINEAR.each do |move|
-                moves << grow_unblocked_moves_in_dir(move[0], move[1])
+                move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
         when "diagonal"
             DIAGONAL.each do |move|
-                moves << grow_unblocked_moves_in_dir(move[0], move[1])
+                move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
         end
         #shovel final position from grow_unblocked into an array
         #return an array of the possible and legitimate end positions the piece can move to
-        moves
+        move_arr
     end
 
     # private
@@ -53,8 +48,7 @@ module Slideable
         filled = false
         unblocked_moves = []
         until filled
-            debugger
-            break if dupe[0] >= 7 || dupe[1] >= 7
+            break if dupe[0] >= 7 || dupe[1] >= 7 || dupe[0] <= 0 || dupe[1] <= 0
             if self.grid[dupe[0] + dx][dupe[1] + dy] == nil
                 unblocked_moves << [dupe[0] + dx, dupe[1] + dy]
                 dupe[0] += dx
@@ -63,6 +57,7 @@ module Slideable
                 filled = true
             end
         end
-        unblocked_moves
+        unblocked_moves unless unblocked_moves.empty?
     end
 end
+

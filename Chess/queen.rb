@@ -32,5 +32,5 @@ class Queen < Piece
 
 end
 
-# q = Queen.new
-# q.moves
+q = Queen.new
+p q.moves
