@@ -2,10 +2,10 @@ require_relative 'req_file.rb'
 require "byebug"
 module Slideable
     DIAGONAL = [[1, 1],[1, -1],[-1, 1],[-1, -1]].freeze
-    LINEAR = [[1, 0],[-1, 0],[0,1],[0,-1]].freeze
+    HORIZONTAL = [[1, 0],[-1, 0],[0,1],[0,-1]].freeze
 
     def horizontal_dirs
-        return LINEAR
+        return HORIZONTAL
     end
 
     def diagonal_dirs
@@ -17,18 +17,18 @@ module Slideable
         case move_dirs
         when "both"
             diagonal_dirs.each do |move|
-                move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
+                move_arr += grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
             horizontal_dirs.each do |move|
-                move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
+                move_arr += grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
-        when "linear"
+        when "horizontal"
             horizontal_dirs.each do |move|
-                move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
+                move_arr += grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
         when "diagonal"
             diagonal_dirs.each do |move|
-                move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
+                move_arr += grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
         end
         #shovel final position from grow_unblocked into an array
@@ -36,7 +36,7 @@ module Slideable
         move_arr
     end
 
-    # private
+    private
     def move_dirs
 
     end

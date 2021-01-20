@@ -1,6 +1,9 @@
 require_relative 'req_file.rb'
 require_relative 'piece.rb'
 require_relative 'nullpiece.rb'
+require_relative 'queen.rb'
+require_relative 'bishop.rb'
+require_relative 'rook.rb'
 
 class Board
     attr_accessor :grid
@@ -27,7 +30,8 @@ class Board
     def move_piece(color, start_pos, end_pos)
         row, col = start_pos
         row1, col1 = end_pos
-        if @grid[row][col].nil?
+        raise "Outside Board" if row1 > 7 || row1 < 0 || col1 > 7 || col1 < 0
+        if @grid[row][col] == Nullpiece.instance 
             raise "There is no piece, fool!"
         end
         unless @grid[row1][col1] == Nullpiece.instance
@@ -35,6 +39,7 @@ class Board
         end
         @grid[row1][col1], grid[row][col] = grid[row][col], @grid[row1][col1]
 
+        @grid[row1][col1].pos = end_pos
     end
 
     def [](pos)
@@ -49,4 +54,11 @@ class Board
 end
 
 b = Board.new
-# b.move_piece([1,4], [3,3])
+bi = Rook.new("orange", b.grid, [2, 4])
+b[[2, 4]] = bi
+
+# p bi.moves
+
+b.move_piece("orange", [2,4], [2,6])
+
+p b.grid
