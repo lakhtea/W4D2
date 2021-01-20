@@ -4,6 +4,9 @@ require_relative 'nullpiece.rb'
 require_relative 'queen.rb'
 require_relative 'bishop.rb'
 require_relative 'rook.rb'
+require_relative 'knight.rb'
+require_relative 'king.rb'
+require_relative 'pawn.rb'
 
 class Board
     attr_accessor :grid
@@ -54,11 +57,11 @@ class Board
 end
 
 b = Board.new
-bi = Rook.new("orange", b.grid, [2, 4])
-b[[2, 4]] = bi
+pawn = Pawn.new("black", b.grid, [1, 4])
+b[[1, 4]] = pawn
 
-# p bi.moves
+p pawn.moves
 
-b.move_piece("orange", [2,4], [2,6])
+# b.move_piece("orange", [2,4], [2,6])
 
 p b.grid

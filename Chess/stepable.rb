@@ -1,15 +1,22 @@
 module Stepable
+    KNIGHT = [[2, 1], [1, 2], [-1, 2], [-1, -2], [-2, 1], [-2, -1], [1, -2], [2, -1]].freeze
+    KING = [[1,0], [0,1], [-1,0], [0, -1], [1, 1], [-1,-1], [-1,1], [1,-1]].freeze
+
+    def knight_moves
+        KNIGHT
+    end
+
+    def king_moves
+        KING
+    end
+
     def moves
-        move_arr = []
         case move_diffs
         when "knight"
-            move_arr << knight_movement
+            return knight_movement
         when "king"
-            move_arr << king_shit
+            return king_movement
         end
-        #shovel final position from grow_unblocked into an array
-        #return an array of the possible and legitimate end positions the piece can move to
-        move_arr
     end
 
     private
@@ -18,10 +25,28 @@ module Stepable
     end
 
     def knight_movement
-        self.pos #[2, 1] [1, 2] [-1, 2] [-1, -2] [-2, 1] [-2, -1] [1, -2] [2, -1]
+        arr = []
+        dupe = self.pos.dup
+        knight_moves.each do |move|
+            if self.board[dupe[0] + move[0]][dupe[1] + move[1]] == Nullpiece.instance
+                new_x = dupe[0] + move[0]
+                new_y = dupe[1] + move[1]
+                arr << [new_x, new_y]
+            end
+        end
+        arr
     end
 
-    def king_shit
-
+    def king_movement
+        arr = []
+        dupe = self.pos.dup
+        king_moves.each do |move|
+            if self.board[dupe[0] + move[0]][dupe[1] + move[1]] == Nullpiece.instance
+                new_x = dupe[0] + move[0]
+                new_y = dupe[1] + move[1]
+                arr << [new_x, new_y]
+            end
+        end
+        arr
     end
 end
