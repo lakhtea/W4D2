@@ -53,6 +53,11 @@ module Slideable
                 unblocked_moves << [dupe[0] + dx, dupe[1] + dy]
                 dupe[0] += dx
                 dupe[1] += dy
+            elsif self.board[dupe[0] + dx][dupe[1] + dy].color != self.color
+                unblocked_moves << [dupe[0] + dx, dupe[1] + dy]
+                dupe[0] += dx
+                dupe[1] += dy
+                filled = true
             else
                 filled = true
             end

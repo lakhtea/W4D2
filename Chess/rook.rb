@@ -11,6 +11,9 @@ class Rook < Piece
             @symbol = "♖"
         end
     end
+    def symbol
+        @symbol
+    end
 
     def valid_moves
         moves

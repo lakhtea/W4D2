@@ -24,7 +24,7 @@ class Pawn < Piece
         arr.each do |move|
             new_x = dupe[0] + move[0]
             new_y = dupe[1] + move[1]
-            final_move_set << [new_x, new_y]
+            final_move_set << [new_x, new_y] #if self.board[new_x][new_y] == Nullpiece.instance
         end
         final_move_set
     end
@@ -54,7 +54,15 @@ class Pawn < Piece
     end
 
     def side_attacks   
-        return [1 * fwd_dirr, 1], [1 * fwd_dirr, -1]
+        dupe = self.pos.dup
+        new_arr = []
+        arr= [[1 * fwd_dirr, 1], [1 * fwd_dirr, -1]]
+        arr.each do |move|
+            new_x = dupe[0] + move[0]
+            new_y = dupe[1] + move[1]
+            new_arr << move if self.board[new_x][new_y].color != self.color && self.board[new_x][new_y] != Nullpiece.instance
+        end
+         new_arr
     end
 
 

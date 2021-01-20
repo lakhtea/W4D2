@@ -28,10 +28,16 @@ module Stepable
         arr = []
         dupe = self.pos.dup
         knight_moves.each do |move|
-            if self.board[dupe[0] + move[0]][dupe[1] + move[1]] == Nullpiece.instance
-                new_x = dupe[0] + move[0]
-                new_y = dupe[1] + move[1]
-                arr << [new_x, new_y]
+            unless dupe[0] + move[0] > 7 || dupe[1] + move[1] > 7 || dupe[0] + move[0] < 0 || dupe[1] + move[1] < 0
+                if self.board[dupe[0] + move[0]][dupe[1] + move[1]] == Nullpiece.instance
+                    new_x = dupe[0] + move[0]
+                    new_y = dupe[1] + move[1]
+                    arr << [new_x, new_y]
+                elsif self.board[dupe[0] + move[0]][dupe[1] + move[1]].color != self.color
+                    new_x = dupe[0] + move[0]
+                    new_y = dupe[1] + move[1]
+                    arr << [new_x, new_y]
+                end
             end
         end
         arr
@@ -41,10 +47,16 @@ module Stepable
         arr = []
         dupe = self.pos.dup
         king_moves.each do |move|
-            if self.board[dupe[0] + move[0]][dupe[1] + move[1]] == Nullpiece.instance
-                new_x = dupe[0] + move[0]
-                new_y = dupe[1] + move[1]
-                arr << [new_x, new_y]
+            unless dupe[0] + move[0] > 7 || dupe[1] + move[1] > 7 || dupe[0] + move[0] < 0 || dupe[1] + move[1] < 0
+                if self.board[dupe[0] + move[0]][dupe[1] + move[1]] == Nullpiece.instance
+                    new_x = dupe[0] + move[0]
+                    new_y = dupe[1] + move[1]
+                    arr << [new_x, new_y]
+                elsif self.board[dupe[0] + move[0]][dupe[1] + move[1]].color != self.color
+                    new_x = dupe[0] + move[0]
+                    new_y = dupe[1] + move[1]
+                    arr << [new_x, new_y]
+                end
             end
         end
         arr
