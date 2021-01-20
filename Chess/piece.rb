@@ -23,7 +23,7 @@ class Piece
     end
 
     def symbol
-        :P
+        :C
     end
 
     def move_into_check?(end_pos)

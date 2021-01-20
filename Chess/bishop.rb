@@ -5,7 +5,11 @@ class Bishop < Piece
     include Slideable
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :B
+        if color == "black"
+            @symbol = "♝"
+        else
+            @symbol = "♗"
+        end
     end
 
     def valid_moves
@@ -16,5 +20,8 @@ class Bishop < Piece
         return "diagonal"
     end
 
+    def inspect
+        @symbol
+    end
 
 end

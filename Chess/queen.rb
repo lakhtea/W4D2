@@ -5,7 +5,11 @@ class Queen < Piece
     include Slideable
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :Q
+        if color == "black"
+            @symbol = "♛"
+        else
+            @symbol = "♕"
+        end
     end
 
     def valid_moves
@@ -16,5 +20,7 @@ class Queen < Piece
         return "both"
     end
 
-
+    def inspect
+        @symbol
+    end
 end

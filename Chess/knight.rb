@@ -5,7 +5,11 @@ class Knight < Piece
     include Stepable
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :H
+        if color == "black"
+            @symbol = "♞"
+        else
+            @symbol = "♘"
+        end
     end
 
     def valid_moves
@@ -15,6 +19,9 @@ class Knight < Piece
     def move_diffs
         return "knight"
     end
-
+    
+    def inspect
+        @symbol
+    end
 
 end

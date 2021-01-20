@@ -8,7 +8,7 @@ class Nullpiece < Piece
     end
 
     def symbol
-        :N
+        :" "
     end
 
     def inspect

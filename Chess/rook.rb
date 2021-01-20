@@ -5,7 +5,11 @@ class Rook < Piece
     include Slideable
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :R
+         if color == "black"
+            @symbol = "♜"
+        else
+            @symbol = "♖"
+        end
     end
 
     def valid_moves

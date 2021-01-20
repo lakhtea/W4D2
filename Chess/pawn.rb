@@ -3,7 +3,11 @@ require_relative './piece.rb'
 class Pawn < Piece
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :P
+          if color == "black"
+            @symbol = "♟︎"
+        else
+            @symbol = "♙"
+        end
     end
 
     def symbol

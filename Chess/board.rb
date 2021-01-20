@@ -16,18 +16,31 @@ class Board
     end
 
     def start_pos
-        @grid[0].each_with_index do |tile, idx|
-            grid[0][idx] = Piece.new("black", @grid, [0,idx])
+        (0...grid.length).each do |idx|
+            grid[0][idx] = array_of_pieces("black", @grid, [0,idx])[idx]
         end
-        @grid[1].each_with_index do |tile, idx|
-            grid[1][idx] = Piece.new("black", @grid, [1, idx])
+        (0...grid.length).each do |idx|
+            grid[1][idx] = Pawn.new("black", @grid, [1, idx])
         end
-        @grid[6].each_with_index do |tile, idx|
-            grid[6][idx] = Piece.new("white", @grid, [6, idx])
+        (0...grid.length).each do |idx|
+            grid[6][idx] = Pawn.new("white", @grid, [6, idx])
         end
-        @grid[7].each_with_index do |tile, idx|
-            grid[7][idx] = Piece.new("white", @grid, [7, idx])
+        (0...grid.length).each do |idx|
+            grid[7][idx] = array_of_pieces("white", @grid, [7, idx]).reverse[idx]
         end
+    end
+
+    def array_of_pieces(color, board, pos)
+        arr = [
+            Rook.new(color, board, pos),
+            Knight.new(color, board, pos),
+            Bishop.new(color, board, pos),
+            Queen.new(color, board, pos),
+            King.new(color, board, pos),
+            Bishop.new(color, board, pos),
+            Knight.new(color, board, pos),
+            Rook.new(color, board, pos)
+        ]
     end
 
     def move_piece(color, start_pos, end_pos)
@@ -57,10 +70,10 @@ class Board
 end
 
 b = Board.new
-pawn = Pawn.new("black", b.grid, [1, 4])
-b[[1, 4]] = pawn
+# pawn = Pawn.new("black", b.grid, [1, 4])
+# b[[1, 4]] = pawn
 
-p pawn.moves
+# p pawn.moves
 
 # b.move_piece("orange", [2,4], [2,6])
 

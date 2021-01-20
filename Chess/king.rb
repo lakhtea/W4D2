@@ -5,7 +5,11 @@ class King < Piece
     include Stepable
     def initialize(color, board, pos)
         super(color, board, pos)
-        @symbol = :K
+        if color == "black"
+            @symbol = "♚"
+        else
+            @symbol = "♔"
+        end
     end
 
     def valid_moves
@@ -16,5 +20,8 @@ class King < Piece
         return "king"
     end
 
+    def inspect
+        @symbol
+    end
 
 end
