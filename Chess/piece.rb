@@ -1,9 +1,11 @@
 require_relative 'req_file.rb'
 
 class Piece
-    def initialize()
-        @color = "black"
-        @symbol = "symbol"
+    attr_reader :board, :color, :pos
+    def initialize(color, board, pos)
+        @color = color
+        @board = board
+        @pos = pos
     end
 
     def to_s
@@ -13,6 +15,7 @@ class Piece
     end
 
     def valid_moves
+
     end
 
     def pos=(val)

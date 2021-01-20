@@ -1,33 +1,33 @@
 require_relative 'req_file.rb'
 require "byebug"
 module Slideable
-    DIAGONAL = [[1, 1],[1, -1],[-1, 1],[-1, -1]]
-    LINEAR = [[1, 0],[-1, 0],[0,1],[0,-1]]
+    DIAGONAL = [[1, 1],[1, -1],[-1, 1],[-1, -1]].freeze
+    LINEAR = [[1, 0],[-1, 0],[0,1],[0,-1]].freeze
 
     def horizontal_dirs
-        
+        return LINEAR
     end
 
     def diagonal_dirs
-
+        return DIAGONAL
     end
 
     def moves
         move_arr = []
         case move_dirs
         when "both"
-            DIAGONAL.each do |move|
+            diagonal_dirs.each do |move|
                 move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
-            LINEAR.each do |move|
+            horizontal_dirs.each do |move|
                 move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
         when "linear"
-            LINEAR.each do |move|
+            horizontal_dirs.each do |move|
                 move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
         when "diagonal"
-            DIAGONAL.each do |move|
+            diagonal_dirs.each do |move|
                 move_arr << grow_unblocked_moves_in_dir(move[0], move[1]) unless grow_unblocked_moves_in_dir(move[0], move[1]).nil?
             end
         end
@@ -49,7 +49,7 @@ module Slideable
         unblocked_moves = []
         until filled
             break if dupe[0] >= 7 || dupe[1] >= 7 || dupe[0] <= 0 || dupe[1] <= 0
-            if self.grid[dupe[0] + dx][dupe[1] + dy] == nil
+            if self.board[dupe[0] + dx][dupe[1] + dy] == Nullpiece.instance
                 unblocked_moves << [dupe[0] + dx, dupe[1] + dy]
                 dupe[0] += dx
                 dupe[1] += dy
